@@ -1,11 +1,11 @@
-# Overview of openEHR and Code4Health Ehrscape  
+# Overview of openEHR and Operon Ehrscape  
 openEHR is a open specification for the information model of an electronic health record, published and maintained by the [openEHR Foundation](http://openehr.org).
 
 The full openEHR specification is complex and beyond the scope of this simple overview. In summary, an application developer interacts with an an openEHR system and a standardised information model via a simple set of ‘service’ APIs.
 
 openEHR does not itself create and publish EHR solutions or applications, rather it provides a specification for a key part of the technology stack on which other developers base their systems. The value of this approach is in reducing the effort to meet the needs of continually changing clinical requirements while increasing the likelihood of interoperability.
 
-The information model and querying/persistence are defined separately via the use of shareable (normally open-sourced) archetypes and templates, There is no direct interaction with the persistence layer, instead all of the interactions with an openEHR system, including querying happens via the information model. In essence this is not dissimilar to the kind of abstraction provided by Django or Ruby Active Objects, but is designed to work with the health domain, is much more extensible, and is designed to work in a completely language and tecnology-neutral manner. 
+The information model and querying/persistence are defined separately via the use of shareable (normally open-sourced) archetypes and templates, There is no direct interaction with the persistence layer, instead all of the interactions with an openEHR system, including querying happens via the information model. In essence this is not dissimilar to the kind of abstraction provided by Django or Ruby Active Objects, but is designed to work with the health domain, is much more extensible, and is designed to work in a completely language and technology-neutral manner.
 
 openEHR systems can be built on any programming language, OS platform and with any persistence solution - examples of SQL Server, Oracle, PostgreSQL, mongoDB and MumpsDB solutions exist. It is the responsibility of the back-end developer to map their chosen persistence solution to the openEHR information model and querying system.
 
@@ -86,9 +86,9 @@ In the construct above the cluster allows multiple Lab results to be captured wi
 **ELEMENT**  
 An Element is the leaf-node construct which is basicaaly a name/value pair with a defined datatype. The nature of the datatype determines the exact structure of the Element.
 
-## Code4Health Ehrscape domains and EhrExplorer
+## Operon Ehrscape domains and EhrExplorer
 
-   The [Code4Health Ehrscape](https://ehrscape.code-4-health.org/) openEHR service provided by [Marand](http:/marand.si) is configured to allow app developers to setup and work their own individual 'domain', populated with its own dummy patient data and openEHR content models and allows both read and write access to the data and for the upload of new openEHR content models.
+   The [Operon Ehrscape](https://ehrscape.code-4-health.org/) openEHR service provided by [Marand](http:/marand.si) is configured to allow app developers to setup and work their own individual 'domain', populated with its own dummy patient data and openEHR content models and allows both read and write access to the data and for the upload of new openEHR content models.
 
    Each Ehrscape domain has its own login and password and in the near future may also be accessed via an Ouath2 session from  trusted provider.
 
@@ -100,30 +100,29 @@ An Element is the leaf-node construct which is basicaaly a name/value pair with 
 
 ### Requesting an Ehrscape domain
 
-You can request an Ehrscape Domain via the Code4Health website. You will need to be a registered Code4Health user and access to your Ehrscape domain will require your Code4Health login and password. You will also need to provide a simple, unique 'domain name' such as 'handi' or 'cerner'. This will be used to create a unique internal server name such as 'ehrscape.c4h.handi' used internally by Ehrscape.
+You can request an Ehrscape Domain via the Operon website. You will need to be a registered Operon user and access to your Ehrscape domain will require your Operon login and password. You will also need to provide a simple, unique 'domain name' such as 'freshehr' or 'cerner'. This will be used to create a unique internal server name such as 'ehrscape.operon.ehrscape' used internally by Ehrscape.
    an example of an ehrscape Domain that is being used for C4H Training might be
 
-       login: ch4_training
+       login: operon_training
        password: 223ergt$
        domain_name: ehrscape.c4h.training
 
 	baseURL
 
- The baseURL for all Code4Health Ehrscape API calls is https://ehrscape.code-4-health.org/rest/v1
+ The baseURL for all Operon Ehrscape API calls is https://test.operon.systems/rest/v1
 
  ### Domain provisioning
 
  When your domain is setup you will be provided with the following
 
- 1. Access to a personal domain on C4H Ehrscape with login, password and domain name.
+ 1. Access to a personal domain on Operon Ehrscape with login, password and domain name.
  2. Access to the Ehrscape EhrExplorer tool.
  3. Acess to the Ehrscape ApiExlorer tool.
  4. The domain will be populated with
 *  Several dummy patents
 *  openEHR content models and dummy data for
 *  Nursing Vital signs encounter
-* Transfer of Care summary Report
-*  Patient End of Life preferences
+
  5. A `workspace.md` text file describing the various identifiers for the login / password, exemplar patients, content models and dummy data.
  6. `Postman` collection and environment files
 
@@ -132,7 +131,7 @@ You can request an Ehrscape Domain via the Code4Health website. You will need to
 ### EhrExplorer
 
 The Marand EhrExplorer tool can be used to create openEHR queries and to visualise the openEHR content models being used by your domain
-   1. Browse to [EHRExplorer](https://ehrscape.code-4-health.org/explorer/)
+   1. Browse to [EHRExplorer](https://test.operon.systems/explorer/)
    2. Enter the name and password for your C4H Ehrscape domain as above
    3. Leave the domain field as `'ehrscape``
 
@@ -143,10 +142,10 @@ e.g. If you navigate to **'$$$'** and right-click you can examine the internal *
 
 #### Ehrscape API browser
 
-The C4H API Browser can be used to
-   1. Browse to [EHRScape API Explorer](https://ehrscape.code-4-health.org/api-explorer.html)
+The Operon Ehrscape API Browser can be used to
+   1. Browse to [EHRScape API Explorer](https://test.operon.systems/api-explorer.html)
    2. Press the ![Settings button](./img/tool_button.png) tool setting button and set userName to `c4h_train` and password to `c4h_train99`
-   3. Any test calls in the API browser will now work against the Code4health Training domain.
+   3. Any test calls in the API browser will now work against the Operon Training domain.
 
 
 #### Using Postman to test API calls
@@ -156,11 +155,11 @@ The [Postman add-on](http://getpostman.com) is vey useful for testing API calls 
 
 
 ## openEHR Archetypes and Templates - Clinical Information components
-The C4H Ehrscape API consumes, retrieves and queries patient healthcare data using a standardised specification and querying format defined by the openEHR Foundation. openEHR is complex and can be difficult for novices to understand (even those with a solid technical background) but the Ehrscape API considerably simplifies the interface with openEHR systems.
+The Operon Ehrscape API consumes, retrieves and queries patient healthcare data using a standardised specification and querying format defined by the openEHR Foundation. openEHR is complex and can be difficult for novices to understand (even those with a solid technical background) but the Ehrscape API considerably simplifies the interface with openEHR systems.
 
 [openEHR](http://openehr.org) provides a way for clinicians to define and share open-source, vendor-neutral clinical information components ('archetypes' and 'templates') which can be consumed, persisted and queried by different technology stacks, as long as they adhere to the openEHR specifications. Examples of archetypes used in this project are `'Procedure', 'Symptom', and 'Imaging result'`. These are managed by the openEHR Foundation using the [Clinical Knowledge Manager](http://openehr.org/ckm) tool and mirrored to [Github](https://github.com/openEHR/CKM-mirror), with a CC-BY-SA licence.
 
-A repository of archetypes and templates designed for UK use is maintained jointly by NHS Scotland, HANDIHealth and RippleOSI at clinicalmodels.org.uk and and mirrored to a [Git repository](https://github.com/ClinicalModelsUK/ckm). HSCIC also have an openEHR CKM repository at http://ckm.hscic.gov.uk/ckm/.
+A repository of archetypes and templates designed for UK use is maintained jointly by NHS Scotland, Apperta Foundation and RippleOSI at clinicalmodels.org.uk and and mirrored to a [Git repository](https://github.com/ClinicalModelsUK/ckm). HSCIC also have an openEHR CKM repository at http://ckm.hscic.gov.uk/ckm/.
 
 ## Overview of openEHR Reference model
 The openEHR Reference model defines a relatively small set of information model constructs which openEHR back-ends must support. This includes a number of generic classes and datatypes.
@@ -168,7 +167,7 @@ The openEHR Reference model defines a relatively small set of information model 
 The Reference model contains virtually no clinical content e.g concepts for Medication, or Diagnosis. These are defined and managed separately as 'archetypes'
 
 ### Key openEHR datatypes
-openEHR has a very rich set of allowable datatypes. A full defiinition is beyond the scope of this document but developers new to this field may find the following notes helpful.
+openEHR has a very rich set of allowable datatypes. A full definition is beyond the scope of this document but developers new to this field may find the following notes helpful.
 
 #### Datatype: text
 **'text'** allows the recording of simple,unformatted text. openEHR does not normally constrain the length of string.
@@ -286,7 +285,7 @@ The current standard **'canonical XML'** openEHR Composition format is defined b
 
 More recently, openEHR implementers have started to develop alternative custom JSON formats ( usuually with converters to/from the canonical XML format).
 
-The [Code4Health Ehrscape API](https://www.ehrscape.com/api-explorer.html), developed by Marand, provides a simple restful API which hides much of the complexity of the underlying openEHR server accepting simpler, flatter forms of composition data, using defaults within the template schema to correctly populate the raw openEHR data which is stored internally.
+The [Operon Ehrscape API](https://www.ehrscape.com/api-explorer.html), developed by Marand, provides a simple restful API which hides much of the complexity of the underlying openEHR server accepting simpler, flatter forms of composition data, using defaults within the template schema to correctly populate the raw openEHR data which is stored internally.
 
 The `FLAT JSON` format is just a set of simple name/value pairs where the 'name' carries the path to each element. You do not need to parse this path. You should normally use this **FLAT JSON** format, which is easier for new openEHR users.
 
